@@ -3,7 +3,7 @@ stardictUtils.js
 
 Node.js module for accessing StarDict dictionary files with support for `dictzip` format 
 
-stardictUtils.js is based  on dictzip.js (https://github.com/dictzip/dictzip.js), Thanks to `tuxor1337`
+stardictUtils.js is based  on [dictzip.js](https://github.com/dictzip/dictzip.js), Thanks to [tuxor1337](https://github.com/tuxor1337)  and [vsemozhetbyt](https://gist.github.com/vsemozhetbyt)
 
 ## Usage
 
