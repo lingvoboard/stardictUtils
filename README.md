@@ -12,9 +12,16 @@ stardictUtils.js is based  on dictzip.js (https://github.com/dictzip/dictzip.js)
 ```
 'use strict';
 
+/*
+
+Command line:
+node test01.js
+
+*/
+
 const fs = require('fs');
 
-const sd = require('./stardictUtils.js');
+const sd = require('../stardictUtils.js');
 
 const indfile = 'encarta_it_it.idx';
 
@@ -34,6 +41,7 @@ for (let v of tab1)
 {
 	fs.writeFileSync('tab1.txt', `${v[0].replace(/\t+/, " ")}\t${v[1]}\t${v[2]}\n`, {encoding: 'utf8', flag: "a"});
 }
+
 
 ```
 ### Output
@@ -50,15 +58,20 @@ abbonamento	59404	414
 ```
 'use strict';
 
+/*
+
+Command line:
+node test02.js
+
+*/
+
 const fs = require('fs');
 
-const sd = require('./stardictUtils.js');
+const sd = require('../stardictUtils.js');
 
+const dzfile = 'encarta_it_it.dict.dz';
 const indfile = 'encarta_it_it.idx';
-
 const synfile = 'encarta_it_it.syn';
-
-const tab1 = sd.getOffsetLengthTable(indfile, synfile);
 
 /*
 
@@ -66,12 +79,16 @@ synfile - optional!!!
 
 */
 
-fs.writeFileSync('tab1.txt', "", {encoding: 'utf8', flag: "w"});
+const tab1 = sd.getOffsetLengthTable(indfile, synfile);
+const tab2 = sd.getSliceChunksTable(dzfile, tab1);
 
-for (let v of tab1)
+fs.writeFileSync('tab2.txt', "", {encoding: 'utf8', flag: "w"});
+
+for (let v of tab2)
 {
-	fs.writeFileSync('tab1.txt', `${v[0].replace(/\t+/, " ")}\t${v[1]}\t${v[2]}\n`, {encoding: 'utf8', flag: "a"});
+	fs.writeFileSync('tab2.txt', `${v[0].replace(/\t+/g, " ")}\t${v[1]}\n`, {encoding: 'utf8', flag: "a"});
 }
+
 
 ```
 
@@ -89,7 +106,15 @@ abbonamento	[[16147,31793],[[0,15646]],[1089,1503]]
 ```
 'use strict';
 
-const sd = require('./stardictUtils.js');
+/*
+
+Command line:
+node test03.js
+
+*/
+
+
+const sd = require('../stardictUtils.js');
 
 const dzfile = 'encarta_it_it.dict.dz';
 const dictfile = 'encarta_it_it.dict';
