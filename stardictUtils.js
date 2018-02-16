@@ -498,6 +498,7 @@ function getArticleBodyfromDZ3(dzfile, q, ignoreCase)
 				if (q.trim() === v.trim())
 				{
 					offsetLength.push([offset, size]);
+					break;
 				}
 			}
 		}
