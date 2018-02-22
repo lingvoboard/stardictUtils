@@ -10,7 +10,7 @@ stardictUtils.js is based  on [dictzip.js](https://github.com/dictzip/dictzip.js
 ### Example №1
 
 ```
-'use strict';
+'use strict'
 
 /*
 
@@ -19,15 +19,15 @@ node test01.js
 
 */
 
-const fs = require('fs');
+const fs = require('fs')
 
-const sd = require('../stardictUtils.js');
+const sd = require('../stardictUtils.js')
 
-const indfile = 'encarta_it_it.idx';
+const indfile = 'encarta_it_it.idx'
 
-const synfile = 'encarta_it_it.syn';
+const synfile = 'encarta_it_it.syn'
 
-const tab1 = sd.getOffsetLengthTable(indfile, synfile);
+const tab1 = sd.getOffsetLengthTable(indfile, synfile)
 
 /*
 
@@ -35,13 +35,15 @@ synfile - optional!!!
 
 */
 
-fs.writeFileSync('tab1.txt', "", {encoding: 'utf8', flag: "w"});
+fs.writeFileSync('tab1.txt', '', { encoding: 'utf8', flag: 'w' })
 
-for (let v of tab1)
-{
-	fs.writeFileSync('tab1.txt', `${v[0].replace(/\t+/, " ")}\t${v[1]}\t${v[2]}\n`, {encoding: 'utf8', flag: "a"});
+for (let v of tab1) {
+  fs.writeFileSync(
+    'tab1.txt',
+    `${v[0].replace(/\t+/, ' ')}\t${v[1]}\t${v[2]}\n`,
+    { encoding: 'utf8', flag: 'a' }
+  )
 }
-
 
 ```
 ### Output
@@ -56,7 +58,7 @@ abbonamento	59404	414
 ### Example №2
 
 ```
-'use strict';
+'use strict'
 
 /*
 
@@ -65,13 +67,13 @@ node test02.js
 
 */
 
-const fs = require('fs');
+const fs = require('fs')
 
-const sd = require('../stardictUtils.js');
+const sd = require('../stardictUtils.js')
 
-const dzfile = 'encarta_it_it.dict.dz';
-const indfile = 'encarta_it_it.idx';
-const synfile = 'encarta_it_it.syn';
+const dzfile = 'encarta_it_it.dict.dz'
+const indfile = 'encarta_it_it.idx'
+const synfile = 'encarta_it_it.syn'
 
 /*
 
@@ -79,16 +81,17 @@ synfile - optional!!!
 
 */
 
-const tab1 = sd.getOffsetLengthTable(indfile, synfile);
-const tab2 = sd.getSliceChunksTable(dzfile, tab1);
+const tab1 = sd.getOffsetLengthTable(indfile, synfile)
+const tab2 = sd.getSliceChunksTable(dzfile, tab1)
 
-fs.writeFileSync('tab2.txt', "", {encoding: 'utf8', flag: "w"});
+fs.writeFileSync('tab2.txt', '', { encoding: 'utf8', flag: 'w' })
 
-for (let v of tab2)
-{
-	fs.writeFileSync('tab2.txt', `${v[0].replace(/\t+/g, " ")}\t${v[1]}\n`, {encoding: 'utf8', flag: "a"});
+for (let v of tab2) {
+  fs.writeFileSync('tab2.txt', `${v[0].replace(/\t+/g, ' ')}\t${v[1]}\n`, {
+    encoding: 'utf8',
+    flag: 'a'
+  })
 }
-
 
 ```
 
@@ -104,7 +107,7 @@ abbonamento	[[16147,31793],[[0,15646]],[1089,1503]]
 ### Example №3
 
 ```
-'use strict';
+'use strict'
 
 /*
 
@@ -113,37 +116,40 @@ node test03.js
 
 */
 
+const sd = require('../stardictUtils.js')
 
-const sd = require('../stardictUtils.js');
+const dzfile = 'encarta_it_it.dict.dz'
+const dictfile = 'encarta_it_it.dict'
 
-const dzfile = 'encarta_it_it.dict.dz';
-const dictfile = 'encarta_it_it.dict';
+// _______________________________
 
-//_______________________________
+console.time('art1')
 
-console.time('art1');
+let art1 = sd.getArticleBodyfromDZ1(dzfile, 7239646, 268)
 
-let art1 = sd.getArticleBodyfromDZ1(dzfile, 7239646, 268);
+console.log(`\nquarzo\n${art1}\n`)
 
-console.log(`\nquarzo\n${art1}\n`);
+console.timeEnd('art1')
 
-console.timeEnd('art1');
+// _______________________________
 
-//_______________________________
+console.time('art2')
 
-console.time('art2');
+let art2 = sd.getArticleBodyfromDZ2(dzfile, [
+  [2140055, 2157514],
+  [[0, 17459]],
+  [8586, 8854]
+])
 
-let art2 = sd.getArticleBodyfromDZ2(dzfile, [[2140055,2157514],[[0,17459]],[8586,8854]]);
+console.log(`\nquarzo\n${art2}\n`)
 
-console.log(`\nquarzo\n${art2}\n`);
+console.timeEnd('art2')
 
-console.timeEnd('art2');
+// _______________________________
 
-//_______________________________
+console.time('art3')
 
-console.time('art3');
-
-let ignoreCase = true;
+let ignoreCase = true
 
 /*
 
@@ -151,17 +157,17 @@ ignoreCase - optional!!!, default - false
 
 */
 
-let art3 = sd.getArticleBodyfromDZ3(dzfile, 'quarzo', ignoreCase);
+let art3 = sd.getArticleBodyfromDZ3(dzfile, 'quarzo', ignoreCase)
 
-console.log(`\nquarzo\n${art3}\n`);
+console.log(`\nquarzo\n${art3}\n`)
 
-console.timeEnd('art3');
+console.timeEnd('art3')
 
-//_______________________________
+// _______________________________
 
-console.time('art4');
+console.time('art4')
 
-let encoding = 'utf8';
+let encoding = 'utf8'
 
 /*
 
@@ -169,11 +175,11 @@ encoding - optional!!!, default - utf8
 
 */
 
-let art4 = sd.getArticleBodyfromDict(dictfile, 7239646, 268, encoding);
+let art4 = sd.getArticleBodyfromDict(dictfile, 7239646, 268, encoding)
 
-console.log(`\nquarzo\n${art4}\n`);
+console.log(`\nquarzo\n${art4}\n`)
 
-console.timeEnd('art4');
+console.timeEnd('art4')
 
 
 ```
