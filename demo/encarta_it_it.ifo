@@ -1,12 +1,11 @@
 StarDict's dict ifo file
 version=2.4.2
 bookname=Dizionari di Encarta 2009 (It-It)
-wordcount=46049
-synwordcount=226659
-idxfilesize=837104
+wordcount=46047
+synwordcount=33
+idxfilesize=836804
 sametypesequence=h
 author=andreyefgs
-email=
-website=
 description=Dizionari di Encarta 2009 (Ita-Ita)<BR><BR>Source:<BR>DSL version: 1.1 (20.04.2015)<BR>Microsoft Encarta 2009 - Premium + Student DVD (Ita)
-date=
+source_language=Italian
+target_language=Italian

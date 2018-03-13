@@ -49,7 +49,7 @@ function readsyns (synfile) {
 }
 
 function getOffsetLengthTable (indfile, synfile) {
-  let indexData = Object.create(null)
+  const indexData = []
 
   if (fileExists(synfile)) {
     var syns = readsyns(synfile)
@@ -86,23 +86,18 @@ function getOffsetLengthTable (indfile, synfile) {
     let size = buf.readUInt32BE(i)
     i += 4
 
-    indexData[word] = [offset, size]
+    indexData.push([word, offset, size])
 
     let arr = syns[index]
 
     if (arr !== undefined) {
-      for (let v of arr) indexData[v] = [offset, size]
+      for (let v of arr) indexData.push([v, offset, size])
     }
 
     index++
   }
 
-  let res = []
-  for (let k in indexData) {
-    res.push([k, indexData[k][0], indexData[k][1]])
-  }
-
-  return res
+  return indexData
 }
 
 function intArrayToString (arr) {
@@ -313,7 +308,21 @@ function getSliceChunksTable (dzfile, OffsetLengthTable) {
       gzip_header,
       vccc
     )
-    SliceChunksTable.push([OffsetLengthTable[i][0], JSON.stringify(ArtInfo)])
+
+    let [arr1, arr2, arr3] = ArtInfo
+
+    if (
+      arr2.length === 1 &&
+      arr2[0][0] === 0 &&
+      arr1[1] - arr1[0] === arr2[0][1]
+    ) {
+      SliceChunksTable.push([
+        OffsetLengthTable[i][0],
+        JSON.stringify([arr1, arr3])
+      ])
+    } else {
+      SliceChunksTable.push([OffsetLengthTable[i][0], JSON.stringify(ArtInfo)])
+    }
   }
 
   return SliceChunksTable
@@ -326,6 +335,12 @@ function getArticleBodyfromDZ1 (dzfile, pos, len) {
 
 function getArticleBodyfromDZ2 (dzfile, ArtInfo) {
   const zlib = require('zlib')
+
+  if (ArtInfo.length === 2) {
+    let last = ArtInfo[1]
+    ArtInfo[1] = [[0, ArtInfo[0][1] - ArtInfo[0][0]]]
+    ArtInfo.push(last)
+  }
 
   const fd = fs.openSync(dzfile, 'r')
   let buf = Buffer.alloc(ArtInfo[0][1] - ArtInfo[0][0])

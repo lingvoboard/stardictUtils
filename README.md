@@ -45,13 +45,14 @@ for (let v of tab1) {
   )
 }
 
+
 ```
 ### Output
 
 ```
-abboffarsi	59154	41
-abbonacciare	59195	209
-abbonamento	59404	414
+abboffarsi	56631	41
+abbonacciare	56672	209
+abbonamento	56881	414
 
 ```
 
@@ -98,9 +99,10 @@ for (let v of tab2) {
 ### Output
 
 ```
-abboffarsi	[[16147,31793],[[0,15646]],[839,880]]
-abbonacciare	[[16147,31793],[[0,15646]],[880,1089]]
-abbonamento	[[16147,31793],[[0,15646]],[1089,1503]]
+abboffarsi	[[403,15682],[56631,56672]]
+abbonacciare	[[403,15682],[56672,56881]]
+abbonamento	[[403,15682],[56881,57295]]
+abbondante	[[403,31353],[[0,15279],[15279,30950]],[58138,58485]]
 
 ```
 
@@ -125,7 +127,7 @@ const dictfile = 'encarta_it_it.dict'
 
 console.time('art1')
 
-let art1 = sd.getArticleBodyfromDZ1(dzfile, 7239646, 268)
+let art1 = sd.getArticleBodyfromDZ1(dzfile, 7237082,	268)
 
 console.log(`\nquarzo\n${art1}\n`)
 
@@ -135,11 +137,7 @@ console.timeEnd('art1')
 
 console.time('art2')
 
-let art2 = sd.getArticleBodyfromDZ2(dzfile, [
-  [2140055, 2157514],
-  [[0, 17459]],
-  [8586, 8854]
-])
+let art2 = sd.getArticleBodyfromDZ2(dzfile, [[2139399,2157010],[6022,6290]])
 
 console.log(`\nquarzo\n${art2}\n`)
 
@@ -175,7 +173,7 @@ encoding - optional!!!, default - utf8
 
 */
 
-let art4 = sd.getArticleBodyfromDict(dictfile, 7239646, 268, encoding)
+let art4 = sd.getArticleBodyfromDict(dictfile, 7237082,	268, encoding)
 
 console.log(`\nquarzo\n${art4}\n`)
 
@@ -190,22 +188,22 @@ console.timeEnd('art4')
 quarzo
 <div class=m1><i>s. m. </i>Biossido di silicio in cristalli a prismi esagonali, spec. trasparenti, spesso geminati, caratterizzati dal fenomeno della piezoelettricità: <i>lampada</i>, <i>orologio al –q</i>. ETIMOLOGIA: dal ted. <i>Quarz</i>, di etim. incerta.</div>
 
-art1: 15.676ms
+art1: 16.384ms
 
 quarzo
 <div class=m1><i>s. m. </i>Biossido di silicio in cristalli a prismi esagonali, spec. trasparenti, spesso geminati, caratterizzati dal fenomeno della piezoelettricità: <i>lampada</i>, <i>orologio al –q</i>. ETIMOLOGIA: dal ted. <i>Quarz</i>, di etim. incerta.</div>
 
-art2: 1.076ms
+art2: 1.106ms
 
 quarzo
 <div class=m1><i>s. m. </i>Biossido di silicio in cristalli a prismi esagonali, spec. trasparenti, spesso geminati, caratterizzati dal fenomeno della piezoelettricità: <i>lampada</i>, <i>orologio al –q</i>. ETIMOLOGIA: dal ted. <i>Quarz</i>, di etim. incerta.</div>
 
-art3: 362.165ms
+art3: 99.192ms
 
 quarzo
 <div class=m1><i>s. m. </i>Biossido di silicio in cristalli a prismi esagonali, spec. trasparenti, spesso geminati, caratterizzati dal fenomeno della piezoelettricità: <i>lampada</i>, <i>orologio al –q</i>. ETIMOLOGIA: dal ted. <i>Quarz</i>, di etim. incerta.</div>
 
-art4: 0.319ms
+art4: 0.277ms
 
 ```
 

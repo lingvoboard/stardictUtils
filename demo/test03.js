@@ -16,7 +16,7 @@ const dictfile = 'encarta_it_it.dict'
 
 console.time('art1')
 
-let art1 = sd.getArticleBodyfromDZ1(dzfile, 7239646, 268)
+let art1 = sd.getArticleBodyfromDZ1(dzfile, 7237082,	268)
 
 console.log(`\nquarzo\n${art1}\n`)
 
@@ -26,11 +26,7 @@ console.timeEnd('art1')
 
 console.time('art2')
 
-let art2 = sd.getArticleBodyfromDZ2(dzfile, [
-  [2140055, 2157514],
-  [[0, 17459]],
-  [8586, 8854]
-])
+let art2 = sd.getArticleBodyfromDZ2(dzfile, [[2139399,2157010],[6022,6290]])
 
 console.log(`\nquarzo\n${art2}\n`)
 
@@ -66,7 +62,7 @@ encoding - optional!!!, default - utf8
 
 */
 
-let art4 = sd.getArticleBodyfromDict(dictfile, 7239646, 268, encoding)
+let art4 = sd.getArticleBodyfromDict(dictfile, 7237082,	268, encoding)
 
 console.log(`\nquarzo\n${art4}\n`)
 
