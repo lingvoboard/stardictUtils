@@ -349,12 +349,12 @@ function getArticleBodyfromDZ2 (dzfile, ArtInfo) {
 
   /*
 
-	const buf = fs.readFileSync(dzfile);
-	const arraybuffer = buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength);
-	const bigchunk = arraybuffer.slice(ArtInfo[0][0], ArtInfo[0][1]);
+  const buf = fs.readFileSync(dzfile);
+  const arraybuffer = buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength);
+  const bigchunk = arraybuffer.slice(ArtInfo[0][0], ArtInfo[0][1]);
 
-	*/
-
+  */
+	
   const bigchunk = buf.buffer.slice(
     buf.byteOffset,
     buf.byteOffset + buf.byteLength
